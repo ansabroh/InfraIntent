@@ -4,6 +4,8 @@
 
 InfraIntent locks an approved architecture and its security requirements, verifies commit-pinned deployment evidence, and records append-only assessments. It never applies Terraform, changes Kubernetes, or controls cloud deployments.
 
+**Deployed contract:** [View on GenLayer Studio Explorer](https://explorer-studio.genlayer.com/address/0x02acA2373A0FB3e702Ee1da864244d568C158963). [Passing CI](https://github.com/ansabroh/InfraIntent/actions/runs/45783552866).
+
 ## Outcomes
 
 | Outcome | Exact rule |

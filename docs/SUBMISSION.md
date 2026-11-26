@@ -14,3 +14,9 @@
 - Deployment record: https://github.com/ansabroh/InfraIntent/blob/main/docs/DEPLOYMENT.md
 
 Submit under Intelligent Contracts; there is no frontend product. Do not claim that synthetic fixtures prove real cloud compliance or that direct-mode mocks prove live network consensus.
+
+- Explorer: https://explorer-studio.genlayer.com/address/0x02acA2373A0FB3e702Ee1da864244d568C158963
+- Passing CI: https://github.com/ansabroh/InfraIntent/actions/runs/45783552866
+
+- Preserved live receipts: https://github.com/ansabroh/InfraIntent/blob/main/evidence/live-events.json
+- Live verification: seven finalized successful transactions, semantic COMPLIANT assessment, followed by disputed DRIFT adjudication; original receipt preserved.

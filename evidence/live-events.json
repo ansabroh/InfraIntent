@@ -1,0 +1,206 @@
+[
+  {
+    "actor": "0xcd72fa5b6a496d84b4a10bcff31d3b7c12346a9e",
+    "case_id": "0",
+    "data": {
+      "baseline": {
+        "bytes": 1177,
+        "commit": "333f382e1cf2f9bb2db794611450563e0cbca0ce",
+        "path": "fixtures/baseline.json",
+        "sha256": "5aa3f8e3a40d1d2d00e1650640f5777b4c76c4aef9ff2caebcadf8dfedfb9307",
+        "url": "https://raw.githubusercontent.com/ansabroh/InfraIntent/333f382e1cf2f9bb2db794611450563e0cbca0ce/fixtures/baseline.json"
+      },
+      "owner": "0xcd72fa5b6a496d84b4a10bcff31d3b7c12346a9e",
+      "policy": {
+        "allowed_public_ids": [],
+        "environment": "production-eu",
+        "max_cpu_millis": 2000,
+        "max_memory_mib": 2048,
+        "require_encryption": true,
+        "required_ids": [
+          "api"
+        ],
+        "requirements": [
+          {
+            "id": "private-api",
+            "severity": "hard",
+            "text": "The api workload must remain private, with no public ingress, host networking or externally exposed load balancer."
+          },
+          {
+            "id": "least-privilege",
+            "severity": "hard",
+            "text": "api must use a dedicated service account with no cluster-admin binding and no privileged container."
+          },
+          {
+            "id": "owner-label",
+            "severity": "advisory",
+            "text": "api must retain an owner label for the platform team."
+          }
+        ]
+      },
+      "repository": "ansabroh/InfraIntent",
+      "reviewer": "0xcd72fa5b6a496d84b4a10bcff31d3b7c12346a9e",
+      "submitter": "0xcd72fa5b6a496d84b4a10bcff31d3b7c12346a9e"
+    },
+    "hash": "03b0f810e1a79bea38fc401955c8786416e32b8c41d2e1d6adf5a2bb1ebc1e67",
+    "kind": "CREATED",
+    "previous": "",
+    "sequence": 0,
+    "version": "infra-intent/1"
+  },
+  {
+    "actor": "0xcd72fa5b6a496d84b4a10bcff31d3b7c12346a9e",
+    "case_id": "0",
+    "data": {
+      "baseline": {
+        "bytes": 1177,
+        "commit": "333f382e1cf2f9bb2db794611450563e0cbca0ce",
+        "path": "fixtures/baseline.json",
+        "sha256": "5aa3f8e3a40d1d2d00e1650640f5777b4c76c4aef9ff2caebcadf8dfedfb9307",
+        "url": "https://raw.githubusercontent.com/ansabroh/InfraIntent/333f382e1cf2f9bb2db794611450563e0cbca0ce/fixtures/baseline.json"
+      },
+      "policy_hash": "2009a19d69f8f8d1ba1ddf78f67b6e320c9ca347128d5df45ac1f67124f53248"
+    },
+    "hash": "c12661955e824073b69ed4e6c573c2595daf819aa0627ae6633c825a7e75053e",
+    "kind": "LOCKED",
+    "previous": "03b0f810e1a79bea38fc401955c8786416e32b8c41d2e1d6adf5a2bb1ebc1e67",
+    "sequence": 1,
+    "version": "infra-intent/1"
+  },
+  {
+    "actor": "0xcd72fa5b6a496d84b4a10bcff31d3b7c12346a9e",
+    "case_id": "0",
+    "data": {
+      "evidence": {
+        "bytes": 1177,
+        "commit": "333f382e1cf2f9bb2db794611450563e0cbca0ce",
+        "path": "fixtures/compliant.json",
+        "sha256": "5aa3f8e3a40d1d2d00e1650640f5777b4c76c4aef9ff2caebcadf8dfedfb9307",
+        "url": "https://raw.githubusercontent.com/ansabroh/InfraIntent/333f382e1cf2f9bb2db794611450563e0cbca0ce/fixtures/compliant.json"
+      },
+      "revision": 1
+    },
+    "hash": "4463134bc718158539f17b1b0d810db93589827041b578b9184cbef7e8d991d6",
+    "kind": "SUBMITTED",
+    "previous": "c12661955e824073b69ed4e6c573c2595daf819aa0627ae6633c825a7e75053e",
+    "sequence": 2,
+    "version": "infra-intent/1"
+  },
+  {
+    "actor": "0xcd72fa5b6a496d84b4a10bcff31d3b7c12346a9e",
+    "case_id": "0",
+    "data": {
+      "adjudication": false,
+      "baseline": {
+        "bytes": 1177,
+        "commit": "333f382e1cf2f9bb2db794611450563e0cbca0ce",
+        "path": "fixtures/baseline.json",
+        "sha256": "5aa3f8e3a40d1d2d00e1650640f5777b4c76c4aef9ff2caebcadf8dfedfb9307",
+        "url": "https://raw.githubusercontent.com/ansabroh/InfraIntent/333f382e1cf2f9bb2db794611450563e0cbca0ce/fixtures/baseline.json"
+      },
+      "decision_hash": "c441df4d9d66cf6d15792a2e6bd0d1c44d912de953eb98d4b339fcfcb0887de1",
+      "evidence": {
+        "bytes": 1177,
+        "commit": "333f382e1cf2f9bb2db794611450563e0cbca0ce",
+        "path": "fixtures/compliant.json",
+        "sha256": "5aa3f8e3a40d1d2d00e1650640f5777b4c76c4aef9ff2caebcadf8dfedfb9307",
+        "url": "https://raw.githubusercontent.com/ansabroh/InfraIntent/333f382e1cf2f9bb2db794611450563e0cbca0ce/fixtures/compliant.json"
+      },
+      "facts": {
+        "drift": [],
+        "unknown": []
+      },
+      "outcome": "COMPLIANT",
+      "policy_hash": "2009a19d69f8f8d1ba1ddf78f67b6e320c9ca347128d5df45ac1f67124f53248",
+      "review": {
+        "checks": [
+          {
+            "id": "private-api",
+            "quote": "hostNetwork: false",
+            "source": "observed",
+            "status": "PASS"
+          },
+          {
+            "id": "least-privilege",
+            "quote": "securityContext: {privileged: false}",
+            "source": "observed",
+            "status": "PASS"
+          },
+          {
+            "id": "owner-label",
+            "quote": "labels: {owner: platform}",
+            "source": "observed",
+            "status": "PASS"
+          }
+        ],
+        "coherent": true
+      },
+      "revision": 1,
+      "version": "infra-intent/1"
+    },
+    "hash": "e0432d41bf4462239c6ada4ca62baf128808b070decf45d703131fd711d65e54",
+    "kind": "ASSESSED",
+    "previous": "4463134bc718158539f17b1b0d810db93589827041b578b9184cbef7e8d991d6",
+    "sequence": 3,
+    "version": "infra-intent/1"
+  },
+  {
+    "actor": "0xcd72fa5b6a496d84b4a10bcff31d3b7c12346a9e",
+    "case_id": "0",
+    "data": {
+      "evidence": {
+        "bytes": 1070,
+        "commit": "333f382e1cf2f9bb2db794611450563e0cbca0ce",
+        "path": "fixtures/drift.json",
+        "sha256": "5132ac1df7f76f26ff8f947eac4d7829872b28bef40b1a604600cbefc508eb2a",
+        "url": "https://raw.githubusercontent.com/ansabroh/InfraIntent/333f382e1cf2f9bb2db794611450563e0cbca0ce/fixtures/drift.json"
+      },
+      "reason": "Synthetic follow-up audit identifies newly public ingress and disabled encryption; reassess against the original private encrypted baseline.",
+      "revision": 1
+    },
+    "hash": "ff3279e71fb698ca1d5f572ce3f098cd712c3d37dd3889247d3fe23f997b5ea6",
+    "kind": "DISPUTED",
+    "previous": "e0432d41bf4462239c6ada4ca62baf128808b070decf45d703131fd711d65e54",
+    "sequence": 4,
+    "version": "infra-intent/1"
+  },
+  {
+    "actor": "0xcd72fa5b6a496d84b4a10bcff31d3b7c12346a9e",
+    "case_id": "0",
+    "data": {
+      "adjudication": true,
+      "baseline": {
+        "bytes": 1177,
+        "commit": "333f382e1cf2f9bb2db794611450563e0cbca0ce",
+        "path": "fixtures/baseline.json",
+        "sha256": "5aa3f8e3a40d1d2d00e1650640f5777b4c76c4aef9ff2caebcadf8dfedfb9307",
+        "url": "https://raw.githubusercontent.com/ansabroh/InfraIntent/333f382e1cf2f9bb2db794611450563e0cbca0ce/fixtures/baseline.json"
+      },
+      "decision_hash": "a76542ffa318f0026b744f64f49c41cfadbc9e8d87f79963336a0f88f4f05fcd",
+      "evidence": {
+        "bytes": 1070,
+        "commit": "333f382e1cf2f9bb2db794611450563e0cbca0ce",
+        "path": "fixtures/drift.json",
+        "sha256": "5132ac1df7f76f26ff8f947eac4d7829872b28bef40b1a604600cbefc508eb2a",
+        "url": "https://raw.githubusercontent.com/ansabroh/InfraIntent/333f382e1cf2f9bb2db794611450563e0cbca0ce/fixtures/drift.json"
+      },
+      "facts": {
+        "drift": [
+          "api:encryption",
+          "api:exposure"
+        ],
+        "unknown": []
+      },
+      "outcome": "DRIFT",
+      "policy_hash": "2009a19d69f8f8d1ba1ddf78f67b6e320c9ca347128d5df45ac1f67124f53248",
+      "review": null,
+      "revision": 1,
+      "version": "infra-intent/1"
+    },
+    "hash": "64b8cbeda65d165bb90bb7b16456f3c1ac8430303208dc364a3daaf2cd708257",
+    "kind": "ADJUDICATED",
+    "previous": "ff3279e71fb698ca1d5f572ce3f098cd712c3d37dd3889247d3fe23f997b5ea6",
+    "sequence": 5,
+    "version": "infra-intent/1"
+  }
+]

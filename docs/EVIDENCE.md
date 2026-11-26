@@ -57,3 +57,9 @@ Do not hash reformatted JSON after uploading: the descriptor hashes the exact fi
 Every semantic row contains a requirement ID, PASS/FAIL/UNKNOWN, baseline/observed source, and a nonempty exact quote from an artifact. PASS must cite observed evidence. Validators independently classify each requirement and coherence; quotes may differ but both candidates must pass grounding validation. A quote's presence does not prove entailment, which remains a semantic validation responsibility.
 
 A decision hash covers the complete receipt excluding `decision_hash`. An event hash covers the complete event excluding `hash`; each event includes the prior event hash, actor, case ID and sequence. Verify from sequence 0 through `get_case(...).events - 1`, and compare the final hash with the case head. Chain integrity does not prove an assessment correct; it makes the committed history auditable.
+
+Export decoded `get_event` results as a JSON array in ascending sequence order, then verify locally:
+
+```sh
+python scripts/verify_history.py evidence/events.json --head EXPECTED_CASE_HEAD
+```

@@ -1,0 +1,76 @@
+{
+  "network": "GenLayer Studio",
+  "date": "2026-11-26",
+  "contract": "0x02acA2373A0FB3e702Ee1da864244d568C158963",
+  "source_commit": "5ca4f55cd31ee53bb98444bceae4ab203598f31d",
+  "source_sha256": "24cbe6c4d689011d77b0fa66afe8685f3046262c8ba1aae87dd702f1f195248b",
+  "fixture_commit": "333f382e1cf2f9bb2db794611450563e0cbca0ce",
+  "execution_mode": "Normal (Full Consensus)",
+  "simulation": false,
+  "case_id": "0",
+  "transactions": {
+    "deploy": "0xff105dc757b25cd0debb1b3e2856d62989912fb7862c97e685be13413754f5aa",
+    "create": "0xd3946abb57d619c142d992cf3c3708a3872f1fda1e4b3fb22a70bcb276eff82b",
+    "lock": "0xf51e07b65fbacc800803d32d99d998ed2d2343652d30e8e6dec7eeffc623ba71",
+    "submit": "0xcb7ce05bb4014764cc5e8f650dbd10b67cf4e2b4d7b0294f1bad8e6ce025dbad",
+    "assess": "0x7b8a7c535bbbee22d0347a5c97933ed44a0e330117b4beb50e1990e22696d2fc",
+    "dispute": "0x0bf42a1ad6584ab7943c2249daaac4ea4733da79c0130f8e77389367d9f28009",
+    "adjudicate": "0xa815dcbc2e15cd69fb9b4193501caaf669601670cc85ae93952b4c44320b0704"
+  },
+  "ci": "https://github.com/ansabroh/InfraIntent/actions/runs/45783552866",
+  "local_tests": 50,
+  "initial_assessment": {
+    "outcome": "COMPLIANT",
+    "decision_hash": "c441df4d9d66cf6d15792a2e6bd0d1c44d912de953eb98d4b339fcfcb0887de1",
+    "observed_status": "FINALIZED",
+    "semantic_checks": 3,
+    "coherent": true
+  },
+  "transaction_statuses": {
+    "deploy": {
+      "status": "FINALIZED",
+      "genvm_result": "SUCCESS",
+      "consensus_result": "Accepted"
+    },
+    "create": {
+      "status": "FINALIZED",
+      "genvm_result": "SUCCESS",
+      "consensus_result": "Accepted"
+    },
+    "lock": {
+      "status": "FINALIZED",
+      "genvm_result": "SUCCESS",
+      "consensus_result": "Accepted"
+    },
+    "submit": {
+      "status": "FINALIZED",
+      "genvm_result": "SUCCESS",
+      "consensus_result": "Accepted"
+    },
+    "assess": {
+      "status": "FINALIZED",
+      "genvm_result": "SUCCESS",
+      "consensus_result": "Accepted"
+    },
+    "dispute": {
+      "status": "FINALIZED",
+      "genvm_result": "SUCCESS",
+      "consensus_result": "Accepted"
+    },
+    "adjudicate": {
+      "status": "FINALIZED",
+      "genvm_result": "SUCCESS",
+      "consensus_result": "Accepted"
+    }
+  },
+  "adjudicated_assessment": {
+    "outcome": "DRIFT",
+    "decision_hash": "a76542ffa318f0026b744f64f49c41cfadbc9e8d87f79963336a0f88f4f05fcd",
+    "facts": [
+      "api:encryption",
+      "api:exposure"
+    ],
+    "head": "64b8cbeda65d165bb90bb7b16456f3c1ac8430303208dc364a3daaf2cd708257",
+    "events": 6
+  }
+}
