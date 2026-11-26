@@ -1,0 +1,15 @@
+{
+  "environment": "production-eu",
+  "resources": [
+    {
+      "id": "api",
+      "public": false,
+      "encrypted": null,
+      "cpu_millis": 1000,
+      "memory_mib": 1024
+    }
+  ],
+  "terraform": "resource \"aws_ebs_volume\" \"api\" { encrypted = true; tags = { workload = \"api\" } }\n# Complete scoped plan: api only. No public endpoints, security group ingress or load balancers. No unknown values.",
+  "kubernetes": "apiVersion: apps/v1\nkind: Deployment\nmetadata: {name: api, labels: {owner: platform}}\nspec:\n  template:\n    spec:\n      serviceAccountName: api-reader\n      hostNetwork: false\n      containers:\n        - name: api\n          securityContext: {privileged: false}\n          resources:\n            limits: {cpu: \"1\", memory: \"1Gi\"}\n# ClusterIP only; no Ingress or LoadBalancer resources.\n# RoleBinding api-reader: get/list only on configmaps; no ClusterRoleBindings.",
+  "audit": "Encryption state unknown. Private api; service account audit incomplete."
+}

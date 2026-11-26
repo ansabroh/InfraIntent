@@ -1,0 +1,13 @@
+{
+  "environment": "production-eu",
+  "required_ids": ["api"],
+  "allowed_public_ids": [],
+  "require_encryption": true,
+  "max_cpu_millis": 2000,
+  "max_memory_mib": 2048,
+  "requirements": [
+    {"id": "private-api", "severity": "hard", "text": "The api workload must remain private, with no public ingress, host networking or externally exposed load balancer."},
+    {"id": "least-privilege", "severity": "hard", "text": "api must use a dedicated service account with no cluster-admin binding and no privileged container."},
+    {"id": "owner-label", "severity": "advisory", "text": "api must retain an owner label for the platform team."}
+  ]
+}
