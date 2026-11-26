@@ -243,7 +243,7 @@ class InfraIntent(gl.Contract):
 
     def _event(self, case_id, c, kind, data):
         event = {'version': VERSION, 'case_id': case_id, 'sequence': c['events'],
-                 'actor': str(gl.message.sender_address), 'kind': kind,
+                 'actor': str(gl.message.sender_address).lower(), 'kind': kind,
                  'previous': c['head'], 'data': data}
         event['hash'] = digest(event)
         self.events[case_id + ':' + str(c['events'])] = canonical(event)
@@ -253,15 +253,18 @@ class InfraIntent(gl.Contract):
 
     @gl.public.write
     def create(self, repository: str, policy_json: str, baseline_json: str,
-               submitter: Address, reviewer: Address) -> str:
+               submitter: str, reviewer: str) -> str:
         require(re.fullmatch('[A-Za-z0-9_-]{1,39}/[A-Za-z0-9_.-]{1,100}', repository) is not None, 'repository')
+        for role in (submitter, reviewer):
+            require(isinstance(role, str) and re.fullmatch('0x[0-9a-fA-F]{40}', role) is not None, 'role address')
+            require(role.lower() != '0x' + '0' * 40, 'zero role')
         p = parse(policy_json)
         policy_check(p)
         base = descriptor(baseline_json, repository)
         case_id = str(self.count)
         self.count += 1
-        c = {'owner': str(gl.message.sender_address), 'submitter': str(submitter),
-             'reviewer': str(reviewer), 'repository': repository, 'policy': p,
+        c = {'owner': str(gl.message.sender_address).lower(), 'submitter': submitter.lower(),
+             'reviewer': reviewer.lower(), 'repository': repository, 'policy': p,
              'baseline': base, 'policy_hash': digest(p), 'state': 'DRAFT',
              'revision': 0, 'events': 0, 'head': '', 'disputed': False}
         self._event(case_id, c, 'CREATED', {'policy': p, 'baseline': base,
@@ -272,7 +275,7 @@ class InfraIntent(gl.Contract):
     @gl.public.write
     def lock(self, case_id: str) -> None:
         c = self._load(case_id)
-        require(str(gl.message.sender_address) == c['owner'], 'owner only')
+        require(str(gl.message.sender_address).lower() == c['owner'], 'owner only')
         require(c['state'] == 'DRAFT', 'already locked')
         p, base = c['policy'], c['baseline']
         def retrieve_baseline():
@@ -286,7 +289,7 @@ class InfraIntent(gl.Contract):
     @gl.public.write
     def submit(self, case_id: str, evidence_json: str) -> None:
         c = self._load(case_id)
-        require(str(gl.message.sender_address) in (c['owner'], c['submitter']), 'submitter only')
+        require(str(gl.message.sender_address).lower() in (c['owner'], c['submitter']), 'submitter only')
         require(c['state'] in ('LOCKED', 'ASSESSED'), 'invalid state')
         require(c['revision'] < 16, 'revision limit')
         c['evidence'] = descriptor(evidence_json, c['repository'])
@@ -328,7 +331,7 @@ class InfraIntent(gl.Contract):
     @gl.public.write
     def dispute(self, case_id: str, evidence_json: str, reason: str) -> None:
         c = self._load(case_id)
-        require(str(gl.message.sender_address) in (c['owner'], c['reviewer']), 'reviewer only')
+        require(str(gl.message.sender_address).lower() in (c['owner'], c['reviewer']), 'reviewer only')
         require(c['state'] == 'ASSESSED' and not c['disputed'], 'dispute unavailable')
         label(reason, 800)
         c['evidence'] = descriptor(evidence_json, c['repository'])

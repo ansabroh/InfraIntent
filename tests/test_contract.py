@@ -36,7 +36,7 @@ def env():
         p,b = fixture('policy'), fixture('baseline')
         d = desc(b, 'fixtures/baseline.json')
         vm.mock_web(r'.*/fixtures/baseline.json$', {'status':200,'body':canon(b)})
-        cid = c.create('ansabroh/InfraIntent', canon(p), canon(d), submitter, reviewer)
+        cid = c.create('ansabroh/InfraIntent', canon(p), canon(d), str(submitter), str(reviewer))
         yield vm,c,cid,p,b,owner,reviewer,submitter,stranger
 
 def stage(env, name='compliant', statuses=('PASS','PASS','PASS'), coherent=True):
@@ -130,6 +130,11 @@ def test_unverifiable_evidence(env,bad):
     elif bad=='environment': obs['environment']='other';body=canon(obs)
     elif bad=='oversize': body='x'*24001
     else: body=canon(obs)
+    if bad in ('schema','duplicate','environment'):
+        c.assess(cid)
+        d['bytes']=len(body.encode())
+        d['sha256']=hashlib.sha256(body.encode()).hexdigest()
+        c.submit(cid,canon(d))
     vm.clear_mocks()
     vm.mock_web(r'.*/fixtures/baseline.json$', {'status':200,'body':canon(fixture('baseline'))})
     vm.mock_web(r'.*/fixtures/compliant.json$',{'status':404 if bad=='404' else 200,'body':body})
@@ -173,7 +178,7 @@ def test_malformed_model_fail_closed(env):
     stage(env);vm,c,cid,*_=env
     vm.clear_mocks()
     vm.mock_web(r'.*/fixtures/baseline.json$', {'status':200,'body':canon(fixture('baseline'))})
-    vm.mock_web(r'.*/fixtures/compliant.json$', {'status':200,'body':canon(fixture('drift' if 'drift' in state(env).get('evidence',{}).get('path','') else 'compliant'))})
+    vm.mock_web(r'.*/fixtures/compliant.json$', {'status':200,'body':canon(fixture('compliant'))})
     vm.mock_llm('.*','not json');c.assess(cid)
     assert state(env)['latest']['outcome']=='INCONCLUSIVE'
 
@@ -190,5 +195,20 @@ def test_invalid_policy_does_not_create(env):
     for value in [True,0,-1,1.5,'2000']:
         p['max_cpu_millis']=value
         with vm.expect_revert('integer'):
-            c.create('ansabroh/InfraIntent',canon(p),canon(desc(b)),submitter,reviewer)
+            c.create('ansabroh/InfraIntent',canon(p),canon(desc(b)),str(submitter),str(reviewer))
     assert c.get_count()==1
+
+@pytest.mark.parametrize('role', [123, '', '0x123', '0x'+'0'*40, '0x'+'z'*40])
+def test_invalid_role_addresses(env,role):
+    vm,c,cid,p,b,owner,reviewer,submitter,*_=env
+    with vm.expect_revert():
+        c.create('ansabroh/InfraIntent',canon(p),canon(desc(b)),role,str(reviewer))
+
+def test_mixed_case_role_address(env):
+    vm,c,cid,p,b,owner,reviewer,submitter,*_=env
+    role=create_address('0x'+'aB'*20)
+    new=c.create('ansabroh/InfraIntent',canon(p),canon(desc(b,'fixtures/baseline.json')),str(role).upper().replace('0X','0x'),str(reviewer))
+    c.lock(new)
+    vm.sender=role
+    c.submit(new,canon(desc(b)))
+    assert json.loads(c.get_case(new))['state']=='SUBMITTED'
